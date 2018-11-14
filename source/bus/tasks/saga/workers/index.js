@@ -5,4 +5,5 @@ export { completeTask } from './completeTask';
 export { incompleteTask } from './incompleteTask';
 export { favoriteTask } from './favoriteTask';
 export { unfavoriteTask } from './unfavoriteTask';
-export { updateMessage } from './updateMessageTask'
+export { updateMessage } from './updateMessageTask';
+export { completeAllTask } from './completeAllTasks';

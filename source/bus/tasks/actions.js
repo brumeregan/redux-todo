@@ -25,6 +25,12 @@ export const tasksActions = {
             payload: task
         };
     },
+    completeAllTasks: (tasks) => {
+        return {
+            type: types.COMPLETE_ALL_TASKS,
+            payload: tasks
+        };
+    },
     incompleteTask: (task) => {
         return {
             type: types.INCOMPLETE_TASK,
@@ -94,6 +100,12 @@ export const tasksActions = {
         return {
             type: types.UPDATE_MESSAGE_ASYNC,
             payload: task
+        };
+    },
+    completeAllTasksAsync: (tasks) => {
+        return {
+            type: types.COMPLETE_ALL_TASKS_ASYNC,
+            payload: tasks,
         };
     },
 };

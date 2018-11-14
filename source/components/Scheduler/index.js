@@ -50,7 +50,27 @@ export default class Scheduler extends Component {
             actions.createTaskAsync(message);
             actions.reset('forms.newTask.message');
         }
-    };
+    }
+
+    _completeAllTasksAsync = () => {
+        const { actions: { completeAllTasksAsync }, tasks } = this.props;
+        if (!this._allTasksCompleted()) {
+            const incompletedTasks = tasks.filter((task) => task.get('completed') === false)
+                .map((item) => {
+                    return item.set('completed', true).delete('modified').delete('created');
+                });
+
+            completeAllTasksAsync(incompletedTasks);
+        }
+
+        return null;
+    }
+
+    _allTasksCompleted = () => {
+        const { tasks } = this.props;
+
+        return tasks.every((task) => task.get('completed') === true);
+    }
 
     render () {
         const { tasks, actions } = this.props;
@@ -92,7 +112,10 @@ export default class Scheduler extends Component {
                         </div>
                     </section>
                     <footer>
-                        <Checkbox checked color1 = '#363636' color2 = '#fff' />
+                        <Checkbox checked = { this._allTasksCompleted() }
+                                  onClick = { this._completeAllTasksAsync }
+                                  color1 = '#363636'
+                                  color2 = '#fff' />
                         <span className = { Styles.completeAllTasks }>
                             Все задачи выполнены
                         </span>

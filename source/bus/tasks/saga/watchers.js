@@ -7,10 +7,10 @@ import {
     incompleteTask,
     favoriteTask,
     unfavoriteTask,
-    updateMessage
+    updateMessage,
+    completeAllTask
 } from './workers';
 import { types } from '../types';
-
 
 function* watchFetchTasks () {
     yield takeEvery(types.FETCH_TASKS_ASYNC, fetchTasks);
@@ -44,6 +44,10 @@ function* watchUpdateMessage () {
     yield takeEvery(types.UPDATE_MESSAGE_ASYNC, updateMessage);
 }
 
+function* watchCompleteAllTasks () {
+    yield takeEvery(types.COMPLETE_ALL_TASKS_ASYNC, completeAllTask);
+}
+
 export function* watchTasks () {
     yield all([
         call(watchFetchTasks),
@@ -53,6 +57,7 @@ export function* watchTasks () {
         call(watchIncompleteTask),
         call(watchFavoriteTask),
         call(watchUnfavoriteTask),
-        call(watchUpdateMessage)
+        call(watchUpdateMessage),
+        call(watchCompleteAllTasks)
     ]);
 }

@@ -31,6 +31,17 @@ export const tasksReducer = (state = initialState, action) => {
             return state.updateIn([state.findIndex((task) => task.get('id') === action.payload.id)], (task) => {
                 return task.set('message', action.payload.message);
             });
+        case types.COMPLETE_ALL_TASKS:
+            return state.map((task) => {
+                const modifiedTask = action.payload.find((item) => item.id === task.get('id'));
+
+                if (modifiedTask) {
+                    return task.merge(modifiedTask);
+                }
+
+                return task;
+            });
+
         default:
             return state;
     }
