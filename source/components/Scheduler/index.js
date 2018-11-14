@@ -19,6 +19,7 @@ import Checkbox from '../../theme/assets/Checkbox';
 const mapStateToProps = (state) => {
     return {
         tasks: state.tasks.sortBy(item => !item.get('favorite')).sortBy(item => item.get('completed')),
+        filter: state.forms.filter
     };
 };
 
@@ -73,9 +74,10 @@ export default class Scheduler extends Component {
     }
 
     render () {
-        const { tasks, actions } = this.props;
+        const { tasks, actions, filter } = this.props;
+        const filteredTasks = tasks.filter((task) => task.get('message').toLowerCase().includes(filter));
 
-        const todoList = tasks.map((task) => (
+        const todoList = filteredTasks.map((task) => (
             <Task
                 completed = { task.get('completed') }
                 favorite = { task.get('favorite') }
@@ -91,7 +93,13 @@ export default class Scheduler extends Component {
                 <main>
                     <header>
                         <h1>Планировщик задач</h1>
-                        <input placeholder = 'Поиск' type = 'search' />
+                            <Control.text
+                                id = 'message'
+                                name = 'message'
+                                className = { Styles.createTask }
+                                model = 'forms.filter'
+                                placeholder = 'Поиск'
+                            />
                     </header>
                     <section>
                         <Form model = 'forms.newTask' onSubmit = { this._submitNewTask }>

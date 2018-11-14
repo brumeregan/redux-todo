@@ -5,4 +5,5 @@ export const formReducer = combineForms({
     newTask: {
         message: '',
     },
+    filter: '',
 }, 'forms');
