@@ -108,6 +108,7 @@ export default class Scheduler extends Component {
                                 name = 'message'
                                 className = { Styles.createTask }
                                 model = 'forms.newTask.message'
+                                maxLength = { 50 }
                                 placeholder = 'Описание моей новой задачи'
                             />
 

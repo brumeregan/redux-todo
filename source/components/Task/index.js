@@ -45,6 +45,7 @@ export default class Task extends PureComponent {
 
     _completeTask = () => {
         const { actions, id, message, favorite } = this.props;
+
         actions.completeTaskAsync({
             id,
             message,
@@ -55,6 +56,7 @@ export default class Task extends PureComponent {
 
     _incompleteTask = () => {
         const { actions, id, message, favorite } = this.props;
+
         actions.incompleteTaskAsync({
             id,
             message,
@@ -76,6 +78,7 @@ export default class Task extends PureComponent {
 
     _unfavoriteTask = () => {
         const { actions, id, message, completed } = this.props;
+
         actions.unfavoriteTaskAsync({
             id,
             message,
@@ -87,13 +90,15 @@ export default class Task extends PureComponent {
     _updateNewTaskMessage = (e) => {
         const { value: newMessage } = e.target;
 
-        this.setState({ newMessage });
+        if (newMessage.length <= 50) {
+            this.setState({ newMessage });
+        }
+
+        return null;
     };
 
     _toggleFavoriteTask = () => {
         const { favorite } = this.props;
-        console.log('favorite', favorite);
-
 
         favorite ? this._unfavoriteTask() : this._favotireTask();
     };
