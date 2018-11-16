@@ -2,11 +2,16 @@
     "runner": "jest-runner",
     "displayName": "test:unit",
     "rootDir": "../",
-    "verbose": false,
+    "verbose": true,
     "notify": true,
     "bail": false,
-    "collectCoverage": false,
-    "collectCoverageFrom": ["<rootDir>/source/**/*.js"],
+    "globals": {
+        "__DEV__": true
+    },
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+        "<rootDir>/source/bus/tasks/**/*.{js,jsx}"
+    ],
     "coveragePathIgnorePatterns": [
         "/node_modules/",
         "/build/",

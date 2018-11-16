@@ -34,11 +34,9 @@ export const tasksReducer = (state = initialState, action) => {
         case types.COMPLETE_ALL_TASKS:
             return state.map((task) => {
                 const modifiedTask = action.payload.find((item) => item.id === task.get('id'));
-
                 if (modifiedTask) {
                     return task.merge(modifiedTask);
                 }
-
                 return task;
             });
 
