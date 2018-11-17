@@ -34,19 +34,17 @@ export const api = {
                 method:  'PUT',
                 headers: {
                     'Content-type': 'application/json',
-                    Authorization: TOKEN,
+                    Authorization:  TOKEN,
                 },
                 body: JSON.stringify([task]),
             });
         },
         completeAll (tasks) {
-            // TODO: create complete all tasks method or in redux
-            console.log({tasks});
             return fetch(`${MAIN_URL}`, {
                 method:  'PUT',
                 headers: {
                     'Content-type': 'application/json',
-                    Authorization: TOKEN,
+                    Authorization:  TOKEN,
                 },
                 body: JSON.stringify(tasks),
             });

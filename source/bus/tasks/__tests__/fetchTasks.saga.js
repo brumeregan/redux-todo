@@ -17,10 +17,11 @@ describe('fetchTasks', () => {
     });
 
     test('should handle 400 response error', async () => {
-       await expectSaga(fetchTasks)
-           .put(uiActions.startSpinning())
-           .provide([[apply(api, api.tasks.fetch), __.fetchResponseFail400]])
-           .put(uiActions.emitError(__.error, 'fetch tasks worker'))
-           .run();
+        await expectSaga(fetchTasks)
+            .put(uiActions.startSpinning())
+            .provide([[apply(api, api.tasks.fetch), __.fetchResponseFail400]])
+            .put(uiActions.emitError(__.error, 'fetch tasks worker'))
+            .put(uiActions.stopSpinning())
+            .run();
     });
 });
